@@ -13,6 +13,7 @@ namespace LayeredArchitecture.Data.Repositories
         Task<ApplicationUser?> GetByEmailAsync(string email);
         Task<IdentityResult> CreateAsync(ApplicationUser user,string password);
         Task<IdentityResult> AuthenticateUser(string email, string password);
+        Task<bool> CheckUserPassword(ApplicationUser user, string password);
        
       
     }

@@ -67,8 +67,7 @@ namespace LayeredArchitecture.Controllers
 
         public async Task<IActionResult> UpdateProduct(int id,ProductModel prod)
         {
-
-            await _productService.UpdateProduct(id, prod);
+           await _productService.UpdateProduct(id, prod);
 
            
                 return Ok("Updated");

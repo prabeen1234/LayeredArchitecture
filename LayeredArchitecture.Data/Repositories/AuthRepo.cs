@@ -20,6 +20,10 @@ namespace LayeredArchitecture.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<bool>CheckUserPassword(ApplicationUser user, string password)
+        {
+            return await _manager.CheckPasswordAsync(user, password);        }
+
         public async Task<IdentityResult> CreateAsync(ApplicationUser user,string password)
         {
 

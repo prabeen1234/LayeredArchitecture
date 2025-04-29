@@ -44,28 +44,13 @@ namespace LayeredArchitecture.Services
         public async Task<string?> LoginAsync(string email, string password)
         {
             var user = await _authRepo.GetByEmailAsync(email);
-            if (user == null  ) // Replace with Identity password check
+            if (user == null || !await _authRepo.CheckUserPassword(user,password) ) // Replace with Identity password check
                 return null;
 
             return _service.GenerateToken(user);
 
         }
-        public string HashPassword(string password)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                // Convert the input string to a byte array and compute the hash
-                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-                // Convert the byte array to a hexadecimal string
-                StringBuilder builder = new StringBuilder();
-                foreach (byte b in bytes)
-                {
-                    builder.Append(b.ToString("x2")); // lowercase hex
-                }
-
-                return builder.ToString();
-            }
-        }
+       
+        
     }
 }
