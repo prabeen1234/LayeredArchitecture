@@ -64,10 +64,13 @@
 //app.Run();
 
 
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using LayeredArchitecture.Data;
 using LayeredArchitecture.Data.Repositories;
 using LayeredArchitecture.Models;
 using LayeredArchitecture.Services;
+using LayeredArchitecture.Services.CustomValidations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -120,6 +123,8 @@ builder.Services.AddAuthentication(options =>
 
 // Add Services
 builder.Services.AddControllers();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductValidation>();
+builder.Services.AddFluentValidationAutoValidation(); // Enables automatic validation
 
 var app = builder.Build();
 

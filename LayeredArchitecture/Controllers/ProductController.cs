@@ -48,12 +48,17 @@ namespace LayeredArchitecture.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] ProductModel product)
         {
-            if (product == null)
+            if(ModelState.IsValid)
             {
-                return BadRequest("Product cannot be null");
+                if (product == null)
+                {
+                    return BadRequest("Product cannot be null");
+                }
+                await _productService.CreateProduct(product);
+                return CreatedAtAction(nameof(GetAllProducts), new { id = product.Id }, product);
             }
-            await _productService.CreateProduct(product);
-            return CreatedAtAction(nameof(GetAllProducts), new { id = product.Id }, product);
+            return BadRequest("Enter valid inputs");
+            
         }
 
         [HttpDelete("{id}")]
@@ -67,12 +72,12 @@ namespace LayeredArchitecture.Controllers
 
         public async Task<IActionResult> UpdateProduct(int id,ProductModel prod)
         {
-           await _productService.UpdateProduct(id, prod);
-
-           
+           if(ModelState.IsValid)
+            {
+                await _productService.UpdateProduct(id, prod);
                 return Ok("Updated");
-
-           
+            }
+            return BadRequest("Enter the valid inputs");
 
         }
 

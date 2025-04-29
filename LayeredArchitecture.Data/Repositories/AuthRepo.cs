@@ -1,7 +1,5 @@
 ﻿using LayeredArchitecture.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace LayeredArchitecture.Data.Repositories
 {
