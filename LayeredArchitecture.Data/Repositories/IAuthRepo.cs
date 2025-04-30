@@ -14,7 +14,8 @@ namespace LayeredArchitecture.Data.Repositories
         Task<IdentityResult> CreateAsync(ApplicationUser user,string password);
         Task<IdentityResult> AuthenticateUser(string email, string password);
         Task<bool> CheckUserPassword(ApplicationUser user, string password);
-       
-      
+        Task<IList<string>> GetUserRole(ApplicationUser user);
+
+
     }
 }

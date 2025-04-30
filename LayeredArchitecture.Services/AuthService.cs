@@ -36,6 +36,7 @@ namespace LayeredArchitecture.Services
             var result = await _authRepo.CreateAsync(user, password);
 
             if (result.Succeeded)
+
                 return "User registered successfully";
 
             var errors = string.Join("; ", result.Errors.Select(e => e.Description));
@@ -47,7 +48,8 @@ namespace LayeredArchitecture.Services
             if (user == null || !await _authRepo.CheckUserPassword(user,password) ) // Replace with Identity password check
                 return null;
 
-            return _service.GenerateToken(user);
+
+            return await _service.GenerateToken(user);
 
         }
        
